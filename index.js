@@ -3,6 +3,14 @@ const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
+app.get('/', (req, res) => {
+    res.send('Hello! Welcome to the page.')
+});
+
+io.on('connection', (socket) => {
+    console.log('A user connected');
+});
+
 app.post('/spin', (req, res) => {
     io.emit('spin', true);
     res.send('success')
